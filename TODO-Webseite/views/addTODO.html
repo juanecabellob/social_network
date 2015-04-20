@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="/TODO-Webseite/libs/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <form action="/TODO-Webseite/views/addTODO.html" method="post">
+        <div class="panel panel-default">
+            <div class="panel-heading">Add a new TODO</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="todo-text">TODO</label>
+                            <input class="form-control" name="todo[text]" value="" id="todo-text">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="todo-deadline">Deadline</label>
+                            <input class="form-control" name="todo[deadline]" value="" id="todo-deadline">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="todo-progress">Progress</label>
+                            <input class="form-control" name="todo[progress]" value="" id="todo-progress">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" type="button">Save</button>
+                <a class="btn default" type="button" href="/TODO-Webseite/index.html">Back</a>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
