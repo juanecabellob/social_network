@@ -54,160 +54,170 @@
     </script>
 </head>
 <body>
+    <div class="panel panel-default panel-body">
+        <div class="col-md-12">
+            <h1 class="text-primary">TODO-List</h1>
+        </div>
+    </div>
+    <div role="tabpanel">
 
-    <div css="panel panel-default">
-        <div class="panel-body">
-            <div class="col-md-12">
-                <h1 class="text-primary">TODO-List</h1>
-                <a href="/TODO-Webseite/views/addTODO.html" class="btn btn-default">Add New</a>
-                <a href="/TODO-Webseite/views/impressum.html" class="btn btn-default"> Impressum</a>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="/TODO-Webseite/index.html#list" aria-controls="home" role="tab" data-toggle="tab">TODO-List</a></li>
+            <li role="presentation"><a href="/TODO-Webseite/views/addTODO.html" aria-controls="messages" role="tab" data-toggle="tab">New TODO</a></li>
+            <li role="presentation"><a href="/TODO-Webseite/views/impressum.html" aria-controls="settings" role="tab" data-toggle="tab">About</a></li>
+        </ul>
+
+        <div class="tab-content">
+
+            <div class="panel panel-default tab-pane active" id="list">
+
+                <table class="table table-striped table-hover">
+
+                    <tr id="table-header">
+                        <th>Number</th>
+                        <th>TODO</th>
+                        <th>Deadline</th>
+                        <th>Progress</th>
+                        <th>Options</th>
+                    </tr>
+
+                    <tr id="todo-first">
+                        <td>1.</td>
+                        <td>
+                            <span class="todo-first first">Create the ground structure for the TODO list.</span>
+                            <input class="form-control todo-first hidden input-first" type="text" value=""/>
+                        </td>
+                        <td>
+                            <span class="todo-first second">20. April</span>
+                            <input class="form-control todo-first hidden input-second" type="text" value=""/>
+                        </td>
+                        <td>
+                            <span class="todo-first third">10%</span>
+                            <input class="form-control todo-first hidden input-third" type="text" value=""/>
+                        </td>
+                        <td>
+                            <div class="button-group" role="group">
+                                <button type="button" class="btn btn-primary" onclick="enableEdit('todo-first')">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                                <button type="button" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </div>
+                            <button class="btn btn-primary hidden" id="save-todo-first" onclick="saveEdit('todo-first')">Save</button>
+                        </td>
+                    </tr>
+
+                    <tr id="todo-second">
+                        <td>2.</td>
+                        <td>
+                            <span class="todo-second first">Create all the sites of the task</span>
+                            <input class="form-control todo-second hidden input-first" type="text" value=""/>
+                        </td>
+                        <td>
+                            <span class="todo-second second">20. April</span>
+                            <input class="form-control todo-second hidden input-second" type="text" value=""/>
+                        </td>
+                        <td>
+                            <span class="todo-second third">0%</span>
+                            <input class="form-control todo-second hidden input-third" type="text" value=""/>
+                        </td>
+                        <td>
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="enableEdit('todo-second')">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                                <button class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </div>
+                            <button class="btn btn-primary hidden" id="save-todo-second" onclick="saveEdit('todo-second')">Save</button>
+                        </td>
+                    </tr>
+
+                    <tr id="todo-third">
+                        <td>3.</td>
+                        <td>
+                            <span class="todo-third first">Fill with information all the sites of the task</span>
+                            <input class="form-control todo-third hidden input-first" type="text" value=""/>
+                        </td>
+                        <td>
+                            <span class="todo-third second">20. April</span>
+                            <input class="form-control todo-third hidden input-second" type="text" value=""/>
+                        </td>
+                        <td>
+                            <span class="todo-third third">0%</span>
+                            <input class="form-control todo-third hidden input-third" type="text" value=""/>
+                        </td>
+                        <td>
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="enableEdit('todo-third')">
+                                    <span class="glyphicon glyphicon-pencil"></span></button>
+                                <button class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </div>
+                            <button class="btn btn-primary hidden" id="save-todo-third" onclick="saveEdit('todo-third')">Save</button>
+                        </td>
+                    </tr>
+
+                    <tr id="todo-fourth">
+                        <td>4.</td>
+                        <td>
+                            <span class="todo-fourth first">Enable to edit the TODO</span>
+                            <input class="form-control todo-fourth hidden input-first" type="text" value=""/>
+                        </td>
+                        <td>
+                            <span class="todo-fourth second">20. April</span>
+                            <input class="form-control todo-fourth hidden input-second" type="text" value=""/>
+                        </td>
+                        <td>
+                            <span class="todo-fourth third">0%</span>
+                            <input class="form-control todo-fourth hidden input-third" type="text" value=""/>
+                        </td>
+                        <td>
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="enableEdit('todo-fourth')">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                                <button class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </div>
+                            <button class="btn btn-primary hidden" id="save-todo-fourth" onclick="saveEdit('todo-fourth')">Save</button>
+                        </td>
+                    </tr>
+
+                    <tr id="todo-fifth">
+                        <td>5.</td>
+                        <td>
+                            <span class="todo-fifth first">Work on the layout</span>
+                            <input class="form-control todo-fifth hidden input-first" type="text" value=""/>
+                        </td>
+                        <td>
+                            <span class="todo-fifth second">21. April</span>
+                            <input class="form-control todo-fifth hidden input-second" type="text" value=""/>
+                        </td>
+                        <td>
+                            <span class="todo-fifth third">0%</span>
+                            <input class="form-control todo-fifth hidden input-third" type="text" value=""/>
+                        </td>
+                        <td>
+                            <div class="button-group">
+                                <button class="btn btn-primary" onclick="enableEdit('todo-fifth')">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                                <button class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </div>
+                            <button class="btn btn-primary hidden" id="save-todo-fifth" onclick="saveEdit('todo-fifth')">Save</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
-
-        <table class="table table-striped table-hover">
-
-            <tr id="table-header">
-                <th>Number</th>
-                <th>TODO</th>
-                <th>Deadline</th>
-                <th>Progress</th>
-                <th>Options</th>
-            </tr>
-
-            <tr id="todo-first">
-                <td>1.</td>
-                <td>
-                    <span class="todo-first first">Create the ground structure for the TODO list.</span>
-                    <input class="form-control todo-first hidden input-first" type="text" value=""/>
-                </td>
-                <td>
-                    <span class="todo-first second">20. April</span>
-                    <input class="form-control todo-first hidden input-second" type="text" value=""/>
-                </td>
-                <td>
-                    <span class="todo-first third">10%</span>
-                    <input class="form-control todo-first hidden input-third" type="text" value=""/>
-                </td>
-                <td>
-                    <div class="button-group" role="group">
-                        <button type="button" class="btn btn-primary" onclick="enableEdit('todo-first')">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                        <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </div>
-                    <button class="btn btn-primary hidden" id="save-todo-first" onclick="saveEdit('todo-first')">Save</button>
-                </td>
-            </tr>
-
-            <tr id="todo-second">
-                <td>2.</td>
-                <td>
-                    <span class="todo-second first">Create all the sites of the task</span>
-                    <input class="form-control todo-second hidden input-first" type="text" value=""/>
-                </td>
-                <td>
-                    <span class="todo-second second">20. April</span>
-                    <input class="form-control todo-second hidden input-second" type="text" value=""/>
-                </td>
-                <td>
-                    <span class="todo-second third">0%</span>
-                    <input class="form-control todo-second hidden input-third" type="text" value=""/>
-                </td>
-                <td>
-                    <div class="button-group">
-                        <button class="btn btn-primary" onclick="enableEdit('todo-second')">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                        <button class="btn btn-danger">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </div>
-                    <button class="btn btn-primary hidden" id="save-todo-second" onclick="saveEdit('todo-second')">Save</button>
-                </td>
-            </tr>
-
-            <tr id="todo-third">
-                <td>3.</td>
-                <td>
-                    <span class="todo-third first">Fill with information all the sites of the task</span>
-                    <input class="form-control todo-third hidden input-first" type="text" value=""/>
-                </td>
-                <td>
-                    <span class="todo-third second">20. April</span>
-                    <input class="form-control todo-third hidden input-second" type="text" value=""/>
-                </td>
-                <td>
-                    <span class="todo-third third">0%</span>
-                    <input class="form-control todo-third hidden input-third" type="text" value=""/>
-                </td>
-                <td>
-                    <div class="button-group">
-                        <button class="btn btn-primary" onclick="enableEdit('todo-third')">
-                            <span class="glyphicon glyphicon-pencil"></span></button>
-                        <button class="btn btn-danger">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </div>
-                    <button class="btn btn-primary hidden" id="save-todo-third" onclick="saveEdit('todo-third')">Save</button>
-                </td>
-            </tr>
-
-            <tr id="todo-fourth">
-                <td>4.</td>
-                <td>
-                    <span class="todo-fourth first">Enable to edit the TODO</span>
-                    <input class="form-control todo-fourth hidden input-first" type="text" value=""/>
-                </td>
-                <td>
-                    <span class="todo-fourth second">20. April</span>
-                    <input class="form-control todo-fourth hidden input-second" type="text" value=""/>
-                </td>
-                <td>
-                    <span class="todo-fourth third">0%</span>
-                    <input class="form-control todo-fourth hidden input-third" type="text" value=""/>
-                </td>
-                <td>
-                    <div class="button-group">
-                        <button class="btn btn-primary" onclick="enableEdit('todo-fourth')">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                        <button class="btn btn-danger">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </div>
-                    <button class="btn btn-primary hidden" id="save-todo-fourth" onclick="saveEdit('todo-fourth')">Save</button>
-                </td>
-            </tr>
-
-            <tr id="todo-fifth">
-                <td>5.</td>
-                <td>
-                    <span class="todo-fifth first">Work on the layout</span>
-                    <input class="form-control todo-fifth hidden input-first" type="text" value=""/>
-                </td>
-                <td>
-                    <span class="todo-fifth second">21. April</span>
-                    <input class="form-control todo-fifth hidden input-second" type="text" value=""/>
-                </td>
-                <td>
-                    <span class="todo-fifth third">0%</span>
-                    <input class="form-control todo-fifth hidden input-third" type="text" value=""/>
-                </td>
-                <td>
-                    <div class="button-group">
-                        <button class="btn btn-primary" onclick="enableEdit('todo-fifth')">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                        <button class="btn btn-danger">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </div>
-                    <button class="btn btn-primary hidden" id="save-todo-fifth" onclick="saveEdit('todo-fifth')">Save</button>
-                </td>
-            </tr>
-        </table>
     </div>
 
 </body>

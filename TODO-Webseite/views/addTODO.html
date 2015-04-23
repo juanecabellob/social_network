@@ -7,37 +7,56 @@
     <link href="/TODO-Webseite/libs/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <form action="/TODO-Webseite/views/addTODO.html" method="post">
-        <div class="panel panel-default">
-            <div class="panel-heading">Add a new TODO</div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="todo-text">TODO</label>
-                            <input class="form-control" name="todo[text]" value="" id="todo-text">
+
+<div class="panel panel-default panel-body">
+    <div class="col-md-12">
+        <h1 class="text-primary">TODO-List</h1>
+    </div>
+</div>
+    <div role="tabpanel">
+
+
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation"><a href="/TODO-Webseite/index.html#list" aria-controls="home" role="tab" data-toggle="tab">TODO-List</a></li>
+            <li role="presentation" class="active"><a href="/TODO-Webseite/views/addTODO.html#add" aria-controls="messages" role="tab" data-toggle="tab">New TODO</a></li>
+            <li role="presentation"><a href="/TODO-Webseite/views/impressum.html" aria-controls="settings" role="tab" data-toggle="tab">About</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+                <form action="/TODO-Webseite/views/addTODO.html" method="post">
+                <div class="panel panel-default tab-pane active" role="tabpanel" id="add">
+                    <div class="panel-heading">Add a new TODO</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="todo-text">TODO</label>
+                                    <input class="form-control" name="todo[text]" value="" id="todo-text">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="todo-deadline">Deadline</label>
+                                    <input class="form-control" name="todo[deadline]" value="" id="todo-deadline">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="todo-progress">Progress</label>
+                                    <input class="form-control" name="todo[progress]" value="" id="todo-progress">
+                                </div>
+                            </div>
                         </div>
+
                     </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="todo-deadline">Deadline</label>
-                            <input class="form-control" name="todo[deadline]" value="" id="todo-deadline">
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="form-group">
-                            <label for="todo-progress">Progress</label>
-                            <input class="form-control" name="todo[progress]" value="" id="todo-progress">
-                        </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-primary" type="button">Save</button>
+                        <a class="btn btn-default" type="button" href="/TODO-Webseite/index.html">Back</a>
                     </div>
                 </div>
-
-            </div>
-            <div class="panel-footer">
-                <button class="btn btn-primary" type="button">Save</button>
-                <a class="btn btn-default" type="button" href="/TODO-Webseite/index.html">Back</a>
-            </div>
+            </form>
         </div>
-    </form>
+    </div>
 </body>
 </html>
