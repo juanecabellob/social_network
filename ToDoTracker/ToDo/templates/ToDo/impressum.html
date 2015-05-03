@@ -1,0 +1,49 @@
+{% extends "ToDo/base.html" %}
+    {% block title %} About {% endblock %}
+        {% block about-tab-active %} class="active" {% endblock %}
+
+
+    {% block inside-tab %}
+
+        <!-- Tab panes -->
+        <div class="panel panel-default tab-pane active" id="about" role="tabpanel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-primary">Impressum</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-default">Angaben gem. § 5 TMG </p>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-primary"><strong>Betreiber und Kontakt:</strong></p>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-12">
+                        Juan Edmundo Cabello Bilbao <br>
+                        Schlüterstr. 80 <br>
+                        App-Nr. 407 <br>
+                        10625 Berlin <br>
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <i>Telefonnummer:</i> +491752329333<br>
+                        <i>E-Mail-Adresse:</i> juanecabellob@gmail.com<br>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <a class="btn btn-default" href="{% url 'ToDo:index' %}">Back</a>
+            </div>
+        </div>
+    {% endblock %}

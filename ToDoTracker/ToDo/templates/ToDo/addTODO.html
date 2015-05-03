@@ -1,0 +1,41 @@
+{% extends "ToDo/base.html" %}
+
+{% block title %} Add a new ToDo {% endblock %}
+{% block add-tab-active %} class="active"{% endblock %}
+
+
+{% block inside-tab %}
+    <form action="{% url 'ToDo:new' %}" method="post">
+        {% csrf_token %}
+        <div class="panel panel-default tab-pane active" role="tabpanel" id="add">
+            <div class="panel-heading">Add a new TODO</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="todo-text">TODO</label>
+                            <input class="form-control" name="text" value="" id="todo-text">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="todo-deadline">Deadline</label>
+                            <input class="form-control" type="date" name="deadline" value="" id="todo-deadline">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="todo-progress">Progress</label>
+                            <input class="form-control" name="progress" value="" id="todo-progress">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-primary" type="submit">Save</button>
+                <a class="btn btn-default" type="button" href="{% url 'ToDo:index' %}">Back</a>
+            </div>
+        </div>
+    </form>
+{% endblock %}
