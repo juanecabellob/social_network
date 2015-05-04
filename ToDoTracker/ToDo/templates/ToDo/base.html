@@ -11,10 +11,6 @@
 
         {% endblock %}
     </style>
-    <script>
-        {% block in-page-script %}
-        {% endblock %}
-    </script>
 </head>
 <body>
     <div class="panel panel-default panel-body">
@@ -39,6 +35,12 @@
             {% endblock %}
         </div>
     </div>
+    <script>
+        {% block in-page-script %}
+        {% endblock %}
+    </script>
+    <script type="text/javascript" src="{% static 'django_ajax/js/jquery.ajax-plugin.min.js' %}"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'django_ajax/js/jquery.ajax.min.js' %}"></script>
 </body>
 </html>

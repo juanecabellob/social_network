@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^new/$', views.new, name='new'),
     url(r'^add/$', views.add, name='add'),
     url(r'^about/$', views.about, name='about'),
+    url(r'^edit/$', views.edit, name='edit'),
+    url(r'^delete/$', views.delete, name='delete'),
 ]
