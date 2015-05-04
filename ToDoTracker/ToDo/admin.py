@@ -1,21 +1,13 @@
 from django.contrib import admin
 
-from .models import Choice, Poll
+from .models import Todo
 
 
-class ChoiceInline(admin.TabularInline):
-    model = Choice
-    extra = 3
-
-class PollAdmin(admin.ModelAdmin):
-    list_display = ['question', 'pub_date', 'was_published_recently']
+class TodoAdmin(admin.ModelAdmin):
+    list_display = ['todo_text', 'deadline', 'progress']
     fieldsets = [
-        (None,               {'fields': ['question']}),
-        ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
+        (None,               {'fields': ['todo_text']}),
     ]
-    list_filter = ['pub_date']
-    search_fields = ['question']
-    inlines = [ChoiceInline]
-admin.site.register(Poll, PollAdmin)
+admin.site.register(Todo)
 # admin.site.register(Choice)
 # Register your models here.
