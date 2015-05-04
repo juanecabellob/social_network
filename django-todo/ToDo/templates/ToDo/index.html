@@ -1,0 +1,167 @@
+{% extends "ToDo/base.html" %}
+    {% block title %} List of your ToDo's {% endblock %}
+    {% block home-tab-active %} class="active" {% endblock %}
+    {% block in-page-style %}
+        #table-header {
+            background-color: #204d74;
+            color: #2aabd2;
+        }
+
+        .table-striped {
+            width: 100%;
+        }
+        .number-column {
+            width: 4px;
+        }
+
+        tr:hover:not(#table-header) {
+            color: #31b0d5;
+            background-color: inherit;
+        }
+
+        .third {
+            width: 70%;
+        }
+
+        .first {
+            width: 100%;
+        }
+        .input-first {
+            width: 100%;
+        }
+        td:not(.options-section), th:not(.options-section) {
+            text-align: center;
+        }
+        .options-section {
+            text-align: center;
+        }
+
+        @media (max-width: 585px) {
+            .number-column {
+                display: none;
+            }
+            .glyphicon {
+                width: 5px;
+                margin-left: 2%;
+                margin-right: 2%;
+            }
+        }
+    {% endblock %}
+    {% block in-page-script %}
+        function preAjax(row) {
+            var month = new Array();
+            month[0] = "Jan";
+            month[1] = "Feb";
+            month[2] = "Mar";
+            month[3] = "Apr";
+            month[4] = "May";
+            month[5] = "Jun";
+            month[6] = "Jul";
+            month[7] = "Aug";
+            month[8] = "Sep";
+            month[9] = "Oct";
+            month[10] = "Nov";
+            month[11] = "Dec";
+            $('#todo-' + row + ' input').addClass('hidden');
+            $('#todo-' + row + ' span:not(.btn)').removeClass('hidden');
+            $('#todo-' + row + ' div.button-group').removeClass('hidden');
+            $('#todo-' + row + ' button#save-todo-' + row).addClass('hidden');
+
+            var id = $('#todo-id-' + row).val();
+            var text = $('.todo-' + row + '.input-first').val();
+            var progress = $('.todo-' + row + '.input-third').val();
+
+            var raw_date = $('.todo-' + row + '.input-second').val();
+            var date = new Date(raw_date);
+            var curr_date = date.getDate();
+            var curr_month = date.getMonth() + 1;
+            var monthInLetter = month[date.getMonth()];
+            var curr_year = date.getFullYear();
+
+            var deadline = curr_year + "-" + curr_month + "-" + curr_date;
+
+            ajaxPost('{% url 'ToDo:edit' %}', {id, text, deadline, progress}, function(content) {
+                //alert(content);
+                $('.todo-' + row + '.first').text(text);
+
+                if (curr_date < 10) {
+                    $('.todo-' + row + '.second').text(monthInLetter + ' 0' + curr_date + ', ' + curr_year);
+                } else {
+                    $('.todo-' + row + '.second').text(monthInLetter + ' ' + curr_date + ', ' + curr_year);
+                }
+                $('.todo-' + row + '.third').text(progress);
+            });
+        };
+
+        function deleteRow(row) {
+             var id = $('#todo-id-' + row).val();
+
+            ajaxPost('{% url 'ToDo:delete' %}', {id}, function(content) {
+                //alert(content);
+                $('#todo-' + row).addClass('hidden');
+            });
+        };
+
+        function enableEdit(row) {
+            $('#' + row + ' input').removeClass('hidden');
+            $('#' + row + ' span:not(.btn)').addClass('hidden');
+            $('#' + row + ' div.button-group').addClass('hidden');
+            $('#' + row + ' button#save-' + row).removeClass('hidden');
+
+            var name = $('.' + row + '.first').text();
+            var date = $('.' + row + '.second').text();
+            var progress = $('.' + row + '.third').text();
+
+            $('.' + row + '.input-first').val(name);
+            $('.' + row + '.input-second').val(date);
+            $('.' + row + '.input-third').val(progress);
+        };
+    {% endblock %}
+
+    {% block inside-tab %}
+
+            <div class="panel panel-default tab-pane active" id="list">
+
+                <table class="table table-striped table-hover">
+                    <tr id="table-header">
+                        <th class="number-column">#</th>
+                        <th>TODO</th>
+                        <th>Deadline</th>
+                        <th>Progress</th>
+                        <th class="options-section">Options</th>
+                    </tr>
+                    {% for entry in list_of_todos %}
+
+                        <tr id="todo-{{ forloop.counter }}">
+                            <input id="todo-id-{{ forloop.counter }}" type="hidden" name="id" value="{{ entry.id }}" />
+                            <td class="number-column">{{ forloop.counter }}.</td>
+                            <td>
+                                <span class="todo-{{ forloop.counter }} first">{{ entry.todo_text }}</span>
+                                <input class="form-control todo-{{ forloop.counter }} hidden input-first" type="text" value="{{ entry.todo_text }}"/>
+                            </td>
+                            <td>
+                                <span class="todo-{{ forloop.counter }} second">{{ entry.deadline|date:"M d, Y" }}</span>
+                                <input class="form-control todo-{{ forloop.counter }} hidden input-second" type="date" value="{{ entry.deadline|date:"m-d-Y" }}"/>
+                            </td>
+                            <td>
+                                <span class="todo-{{ forloop.counter }} third">{{ entry.progress }}</span>
+                                <input class="form-control todo-{{ forloop.counter }} hidden input-third" type="text" value="{{ entry.progress }}"/>
+                            </td>
+                            <td class="options-section">
+                                <div class="button-group" role="group">
+                                    <button type="button" class="btn btn-primary" onclick="enableEdit('todo-{{ forloop.counter }}')">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger">
+                                        <span class="glyphicon glyphicon-trash" onclick="deleteRow('{{ forloop.counter }}')"></span>
+                                    </button>
+                                </div>
+                                <button class="btn btn-primary hidden" id="save-todo-{{ forloop.counter }}" onclick="preAjax('{{ forloop.counter }}')">Save</button>
+                            </td>
+                        </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TODO List | {%  block title %} Create your own TODO list {% endblock %}</title>
+    {% load staticfiles %}
+    <link href="{% static 'ToDo/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+    <style>
+        {% block in-page-style %}
+
+        {% endblock %}
+    </style>
+</head>
+<body>
+    <div class="panel panel-default panel-body">
+        <div class="col-md-12">
+            <h1 class="text-primary">TODO-List</h1>
+        </div>
+    </div>
+    <div role="tabpanel">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            {% block nav-tabs %}
+                {# ToDo: change active class #}
+                <li role="presentation" {% block home-tab-active %} {% endblock %}><a href="{% url 'ToDo:index' %}" role="tab" data-toggle="tab">TODO-List</a></li>
+                <li role="presentation" {% block add-tab-active %}  {% endblock %}><a href="{% url 'ToDo:add' %}" role="tab" data-toggle="tab">New TODO</a></li>
+                <li role="presentation" {% block about-tab-active %} {% endblock %}><a href="{% url 'ToDo:about' %}" role="tab" data-toggle="tab">About</a></li>
+            {% endblock %}
+        </ul>
+
+        <div class="tab-content">
+            {% block inside-tab %}
+            {% endblock %}
+        </div>
+    </div>
+    <script>
+        {% block in-page-script %}
+        {% endblock %}
+    </script>
+    <script type="text/javascript" src="{% static 'django_ajax/js/jquery.ajax-plugin.min.js' %}"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'django_ajax/js/jquery.ajax.min.js' %}"></script>
+</body>
+</html>
