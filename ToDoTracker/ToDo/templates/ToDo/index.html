@@ -97,7 +97,7 @@
              var id = $('#todo-id-' + row).val();
 
             ajaxPost('{% url 'ToDo:delete' %}', {id}, function(content) {
-                //alert(content);
+                alert(content);
                 $('#todo-' + row).addClass('hidden');
             });
         };
