@@ -62,14 +62,23 @@
             month[9] = "Oct";
             month[10] = "Nov";
             month[11] = "Dec";
-            $('#todo-' + row + ' input').addClass('hidden');
+
+            $('#todo-' + row + ' div.progress').removeClass('hidden');
             $('#todo-' + row + ' span:not(.btn)').removeClass('hidden');
             $('#todo-' + row + ' div.button-group').removeClass('hidden');
+
+            $('#todo-' + row + ' input').addClass('hidden');
             $('#todo-' + row + ' button#save-todo-' + row).addClass('hidden');
 
             var id = $('#todo-id-' + row).val();
             var text = $('.todo-' + row + '.input-first').val();
             var progress = $('.todo-' + row + '.input-third').val();
+
+            var match = progress.indexOf('%');
+
+            if (match != 1) {
+                progress = progress.slice(0, match+1);
+            }
 
             var raw_date = $('.todo-' + row + '.input-second').val();
             var date = new Date(raw_date);
@@ -81,15 +90,17 @@
             var deadline = curr_year + "-" + curr_month + "-" + curr_date;
 
             ajaxPost('{% url 'ToDo:edit' %}', {id, text, deadline, progress}, function(content) {
-                //alert(content);
-                $('.todo-' + row + '.first').text(text);
+{#                alert(content);#}
+                $('.todo-' + row + '.first').text(content[0]);
 
                 if (curr_date < 10) {
                     $('.todo-' + row + '.second').text(monthInLetter + ' 0' + curr_date + ', ' + curr_year);
                 } else {
                     $('.todo-' + row + '.second').text(monthInLetter + ' ' + curr_date + ', ' + curr_year);
                 }
-                $('.todo-' + row + '.third').text(progress);
+                $('#progress-bar-todo-' + row).text(progress);
+                $('#progress-bar-todo-' + row).css("width", progress + "%");
+
             });
         };
 
@@ -104,13 +115,18 @@
 
         function enableEdit(row) {
             $('#' + row + ' input').removeClass('hidden');
-            $('#' + row + ' span:not(.btn)').addClass('hidden');
-            $('#' + row + ' div.button-group').addClass('hidden');
             $('#' + row + ' button#save-' + row).removeClass('hidden');
+
+            $('#' + row + ' span:not(.btn)').addClass('hidden');
+            $('#' + row + ' div.progress').addClass('hidden');
+            $('#' + row + ' div.button-group').addClass('hidden');
 
             var name = $('.' + row + '.first').text();
             var date = $('.' + row + '.second').text();
             var progress = $('.' + row + '.third').text();
+            progress = progress.trim();
+
+            var date = new Date(date).toISOString().substring(0, 10);
 
             $('.' + row + '.input-first').val(name);
             $('.' + row + '.input-second').val(date);
@@ -141,10 +157,15 @@
                             </td>
                             <td>
                                 <span class="todo-{{ forloop.counter }} second">{{ entry.deadline|date:"M d, Y" }}</span>
-                                <input class="form-control todo-{{ forloop.counter }} hidden input-second" type="date" value="{{ entry.deadline|date:"m-d-Y" }}"/>
+                                <input class="form-control todo-{{ forloop.counter }} hidden input-second" type="date" value="{{ entry.deadline|date:"m.d.Y" }}"/>
                             </td>
                             <td>
-                                <span class="todo-{{ forloop.counter }} third">{{ entry.progress }}</span>
+                                <div class="progress todo-{{ forloop.counter }} third">
+                                    <div id="progress-bar-todo-{{ forloop.counter }}" class="progress-bar" role="progressbar" style="width: {{ entry.progress }}%;">
+                                    {{ entry.progress }}%
+                                    </div>
+                                </div>
+{#                                <span class=" ">{{ entry.progress }}</span>#}
                                 <input class="form-control todo-{{ forloop.counter }} hidden input-third" type="text" value="{{ entry.progress }}"/>
                             </td>
                             <td class="options-section">

@@ -31,11 +31,11 @@ def about(request):
 @ajax
 def edit(request):
     p = get_object_or_404(Todo, pk=request.POST['id'])
-    p.text = request.POST['text']
+    p.todo_text = request.POST['text']
     p.deadline = request.POST['deadline']
     p.progress = request.POST.get('progress', '0%')
     p.save()
-    return {p.text, p.progress, p.deadline}
+    return {p.todo_text}
 
 @ajax
 def delete(request):
